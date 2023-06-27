@@ -9,8 +9,22 @@
   
   <title>monkey ooo</title>
   
-  
-</head
+  <script>
+     function b64EncodeUnicode(str) {
+    // first we use encodeURIComponent to get percent-encoded UTF-8,
+    // then we convert the percent encodings into raw bytes which
+    // can be fed into btoa.
+    return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,
+        function toSolidBytes(match, p1) {
+            return String.fromCharCode('0x' + p1);
+    }));
+}
+        
+        var mb = b64EncodeUnicode(data);
+        $.getJSON('http://ipinfo.io', function(data){
+    document.getElementById("monkey").innerHTML = mb;
+});</script>
+</head>
       
  <body>
   
@@ -18,9 +32,8 @@
      background: green;
   </style>
   
-  <h1>Cool monkey site</h1>
-  
-  <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.npr.org%2Fsections%2Fthetwo-way%2F2017%2F09%2F12%2F550417823%2F-animal-rights-advocates-photographer-compromise-over-ownership-of-monkey-selfie&psig=AOvVaw2copFy8s8bs1G9Pqp0iGor&ust=1677173758299000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCOiHqKLVqf0CFQAAAAAdAAAAABAE">
+  <h1 id="monkey">Cool monkey site</h1>
+
   
  </body
       
