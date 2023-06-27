@@ -13,7 +13,15 @@
     </script>
       
   <script>
-     function b64EncodeUnicode(str) {
+    
+        $.get('https://www.cloudflare.com/cdn-cgi/trace', function(data) {
+  // Convert key-value pairs to JSON
+  // https://stackoverflow.com/a/39284735/452587
+  data = data.trim().split('\n').reduce(function(obj, pair) {
+    pair = pair.split('=');
+    return obj[pair[0]] = pair[1], obj;
+  }, {});
+   function b64EncodeUnicode(str) {
     // first we use encodeURIComponent to get percent-encoded UTF-8,
     // then we convert the percent encodings into raw bytes which
     // can be fed into btoa.
@@ -24,11 +32,11 @@
               
     }));
            var mb = b64EncodeUnicode(data);
+         document.getElementById("monkey").innerHTML = mb;
 }
-        
-        $.getJSON('http://ipinfo.io', function(data){
-    document.getElementById("monkey").innerHTML = mb;
-});</script>
+              
+});
+        </script>
 </head>
       
  <body>
